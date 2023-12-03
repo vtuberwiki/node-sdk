@@ -21,7 +21,7 @@ npm install vtuberwiki-sdk
 import Sdk from "vtuberwiki-sdk";
 
 // Create an instance of the SDK
-const sdk = new Sdk();
+const sdk = Sdk.getInstance()
 
 // Example: Get information about Vtubers
 const vtubers = await sdk.getVtubers({ limit: 5 });
