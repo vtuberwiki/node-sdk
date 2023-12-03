@@ -1,0 +1,41 @@
+{
+  "name": "vtuberwiki-sdk",
+  "version": "0.0.1",
+  "description": "The sdk for the vtubers.wiki website!",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "ts-node tests/index.ts",
+    "build": "tsc",
+    "create": "npm run build && npm publish && git add . && git commit -m \"Publishing new version\" && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vtuberwiki/node-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vtuberwiki/node-sdk/issues"
+  },
+  "homepage": "https://vtubers.wiki/sdk/node",
+  "keywords": [
+    "developer",
+    "vtuber",
+    "vtubers",
+    "wiki",
+    "sdk",
+    "software",
+    "web"
+  ],
+  "author": "withervt",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "developer-toolkit-utils": "^1.0.9"
+  }
+}
