@@ -94,6 +94,7 @@ class Sdk {
                 description: software.description,
                 author: software.author,
                 image: software.image,
+                body: software.body,
             }
         });
 
