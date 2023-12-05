@@ -5,7 +5,10 @@ const sdk = VtuberSdk.getInstance();
 
 console.log(vars);
 
+sdk.setApiVersion('1');
+
 (async () => {
+    
     await sdk.getVtubers({ skip: 2, limit: 5, showMetadata: true }).then((vtubers) => {
         console.log(vtubers);
     });

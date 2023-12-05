@@ -23,6 +23,8 @@ import Sdk from "vtuberwiki-sdk";
 // Create an instance of the SDK
 const sdk = Sdk.getInstance()
 
+sdk.setApiVersion('1');
+
 // Example: Get information about Vtubers
 const vtubers = await sdk.getVtubers({ limit: 5 });
 console.log("Vtubers:", vtubers);
@@ -89,6 +91,10 @@ Retrieve information about partners.
 `getTopics(params?: TopicParams): Promise<Object | Array>`
 
 Retrieve information about topics.
+
+`setApiVersion(version: string): void`
+
+Change the API version used by the SDK.
 
 ### Available Parameters
 Each data retrieval method supports specific parameters. See the [Parameter Interfaces](https://github.com/vtuberwiki/node-sdk/blob/main/src/interfaces/config/methods.ts) section for detailed information.

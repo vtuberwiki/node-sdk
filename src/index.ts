@@ -24,6 +24,7 @@ const formatDate = (params: any, date: string) => {
  */
 class Sdk {
     private static instance: Sdk;
+    public API_VERSION = vars.VERSION;
 
     /**
      * Private constructor to enforce singleton pattern.
@@ -42,7 +43,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getVtubers(params?: VtuberParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/vtubers.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/vtubers.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -81,7 +82,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getSoftware(params?: SoftwareParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/software.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/software.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -123,7 +124,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getGuides(params?: GuideParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/guides.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/guides.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -166,7 +167,7 @@ class Sdk {
      */
 
     public async getAuthors(params?: AuthorParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/authors.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/authors.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -205,7 +206,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getBlogs(params?: BlogParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/blog.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/blog.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -245,7 +246,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getChangeLogs(params?: ChangeLogParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/changelog.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/changelog.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -295,7 +296,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getPartners(params?: PartnerParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/partners.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/partners.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -335,7 +336,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getTopics(params?: TopicParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/topics.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/topics.json`).then((res) => res.data);
         
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -378,6 +379,22 @@ class Sdk {
         }
 
         return Sdk.instance;
+    }
+
+    /**
+     * Set the API version.
+     * @param {string} version - The API version.
+     * @returns {void}
+     * @throws {Error} - If the API version is invalid.
+     * @example
+     * sdk.setApiVersion('1');
+     */
+    public setApiVersion(version: string) {
+        if (parseInt(version) < 1 || parseInt(version) > vars.MAX_VERSION) {
+            throw new Error(`Error - API version must be between 1 and ${vars.MAX_VERSION}`);
+        }
+
+        this.API_VERSION = version;
     }
 }
 
