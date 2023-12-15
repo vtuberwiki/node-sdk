@@ -96,6 +96,10 @@ Retrieve information about topics.
 
 Change the API version used by the SDK.
 
+Retrieve information about out social media.
+
+`getSocials(params?: TopicParams): Promise<Object | Array>`
+
 ### Available Parameters
 Each data retrieval method supports specific parameters. See the [Parameter Interfaces](https://github.com/vtuberwiki/node-sdk/blob/main/src/interfaces/config/methods.ts) section for detailed information.
 

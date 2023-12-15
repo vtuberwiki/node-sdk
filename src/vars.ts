@@ -16,10 +16,7 @@
 const vars = {
     WEB_URL: "https://vtubers.wiki",
     WEB_API_URL: "https://vtubers.wiki/api",
-    GITHUB_DATA: {
-        OWNER: "vtuberwiki",
-    },
-    VERSION: "1",
+    VERSION: 1,
     MAX_VERSION: 50,
 };
 

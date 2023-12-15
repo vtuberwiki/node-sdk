@@ -108,8 +108,20 @@ interface TopicParams {
  * @property {number} [skip=0] - Skip the first n results.
  * @property {boolean} [showMetadata=false] - Show metadata from the request.
  */
-
 interface BlogParams {
+    limit?: number
+    skip?: number
+    showMetadata?: boolean
+}
+
+/**
+ * Parameters for retrieving information about the Social Media.
+ * @typedef {Object} SocialMediaParams
+ * @property {number} [limit=0] - Limit the number of results returned.
+ * @property {number} [skip=0] - Skip the first n results.
+ * @property {boolean} [showMetadata=false] - Show metadata from the request.
+ */
+interface SocialMediaParams {
     limit?: number
     skip?: number
     showMetadata?: boolean
@@ -123,6 +135,6 @@ export {
     ChangeLogParams,
     PartnerParams,
     TopicParams,
-    BlogParams
-
+    BlogParams,
+    SocialMediaParams
 }

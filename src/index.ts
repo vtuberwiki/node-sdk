@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { VtuberParams, SoftwareParams, GuideParams, AuthorParams, BlogParams, ChangeLogParams, PartnerParams, TopicParams } from './interfaces/config/methods';
+import { VtuberParams, SoftwareParams, GuideParams, AuthorParams, BlogParams, SocialMediaParams, ChangeLogParams, PartnerParams, TopicParams } from './interfaces/config/methods';
 import { fDate, fTime } from "developer-toolkit-utils";
 import vars from './vars';
+import { AxiosError } from 'axios';
 
 /**
  * Format a date based on specified parameters.
@@ -44,7 +45,7 @@ class Sdk {
      */
     public async getVtubers(params?: VtuberParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/vtubers.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -83,7 +84,7 @@ class Sdk {
      */
     public async getSoftware(params?: SoftwareParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/software.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -125,7 +126,7 @@ class Sdk {
      */
     public async getGuides(params?: GuideParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/guides.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -168,7 +169,7 @@ class Sdk {
 
     public async getAuthors(params?: AuthorParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/authors.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -207,7 +208,7 @@ class Sdk {
      */
     public async getBlogs(params?: BlogParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/blog.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -247,7 +248,7 @@ class Sdk {
      */
     public async getChangeLogs(params?: ChangeLogParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/changelog.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -297,7 +298,7 @@ class Sdk {
      */
     public async getPartners(params?: PartnerParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/partners.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -329,15 +330,15 @@ class Sdk {
         }
     }
 
-     /**
-     * Get information about topics.
-     * @param {TopicParams} params - Parameters for filtering topic data.
-     * @returns {Object | Array} - Topic data or metadata based on parameters.
-     * @throws {Error} - If the request to the web API fails.
-     */
+    /**
+    * Get information about topics.
+    * @param {TopicParams} params - Parameters for filtering topic data.
+    * @returns {Object | Array} - Topic data or metadata based on parameters.
+    * @throws {Error} - If the request to the web API fails.
+    */
     public async getTopics(params?: TopicParams) {
         const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/topics.json`).then((res) => res.data);
-        
+
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
         }
@@ -370,6 +371,55 @@ class Sdk {
     }
 
     /**
+     * Get information about the social media.
+     * @param {SocialMediaParams} params - Parameters for filtering data.
+     * @returns {Object | Array} - Social Media data or metadata based on parameters.
+     * @throws {Error} - If the request to the web API fails.
+     */
+    public async getSocials(params?: SocialMediaParams) {
+        try {
+            const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/socials.json`);
+    
+            if (response.status !== 200) {
+                throw new Error(`Error - ${response.status}: ${response.statusText}`);
+            }
+    
+            const responseData = response.data;
+    
+            let Data = responseData.map(($: any) => {
+                return {
+                    name: $.name,
+                    href: $.href,
+                    icon: `https://vtubers.wiki${$.icon}`,
+                };
+            });
+    
+            if (params?.limit) Data = Data.slice(0, params.limit);
+            if (params?.skip) Data = Data.slice(params.skip);
+            if (params?.showMetadata) {
+                return {
+                    data: Data,
+                    metadata: {
+                        count: Data.length,
+                        total: responseData.length,
+                        skip: params.skip || 0,
+                        limit: params.limit || responseData.length,
+                        statusCode: response.status,
+                    },
+                };
+            } else {
+                return Data;
+            }
+        } catch (error) {
+            console.error("Error fetching socials:", (error as Error).message);
+            
+            if (axios.isAxiosError(error)) {
+                console.error("Response object:", (error as AxiosError).response);
+            }
+        }
+    }    
+
+    /**
      * Get a singleton instance of the SDK.
      * @returns {Sdk} - The SDK instance.
      */
@@ -394,7 +444,7 @@ class Sdk {
             throw new Error(`Error - API version must be between 1 and ${vars.MAX_VERSION}`);
         }
 
-        this.API_VERSION = version;
+        this.API_VERSION = Number(version)
     }
 }
 
