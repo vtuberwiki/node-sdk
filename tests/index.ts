@@ -9,9 +9,9 @@ console.log(vars);
 
 (async () => {
     
-    // await sdk.getVtubers({ skip: 2, limit: 5, showMetadata: true }).then((vtubers) => {
-    //     console.log(vtubers);
-    // });
+    await sdk.getVtubers({ skip: 2, limit: 5, showMetadata: true }).then((vtubers) => {
+        console.log(vtubers);
+    });
     
     // await sdk.getSoftware({ skip: 2, limit: 5, showMetadata: true }).then((software) => {
     //     console.log(software);
@@ -41,7 +41,7 @@ console.log(vars);
     //     console.log(topics);
     // });
 
-    await sdk.getSocials().then((socials) => {
-        console.log(socials);
-    });
+    // await sdk.getSocials().then((socials) => {
+    //     console.log(socials);
+    // });
 })();

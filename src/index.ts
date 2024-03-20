@@ -44,7 +44,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getVtubers(params?: VtuberParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/vtubers.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/vtubers.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -83,7 +83,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getSoftware(params?: SoftwareParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/software.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/software.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -125,7 +125,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getGuides(params?: GuideParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/guides.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/guides.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -168,7 +168,7 @@ class Sdk {
      */
 
     public async getAuthors(params?: AuthorParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/authors.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/authors.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -207,7 +207,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getBlogs(params?: BlogParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/blog.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/blog.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -247,7 +247,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getChangeLogs(params?: ChangeLogParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/changelog.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/changelog.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -297,7 +297,7 @@ class Sdk {
      * @throws {Error} - If the request to the web API fails.
      */
     public async getPartners(params?: PartnerParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/partners.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/partners.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);
@@ -337,7 +337,7 @@ class Sdk {
     * @throws {Error} - If the request to the web API fails.
     */
     public async getTopics(params?: TopicParams) {
-        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/topics.json`).then((res) => res.data);
+        const response = await axios.get(`${vars.WEB_API_URL}/v${this.API_VERSION}/topics.json`);
 
         if (response.status !== 200) {
             throw new Error(`Error - ${response.status}: ${response.statusText}`);

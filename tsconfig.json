@@ -11,6 +11,10 @@
       "sourceMap": false,
       "strict": true,
       "noImplicitAny": true,
+      "lib": [
+        "ES2015",
+        "DOM"
+      ]
   },
   "include": [
       "src/**/*.ts",
